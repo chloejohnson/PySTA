@@ -21,3 +21,7 @@ CODES:
 
 - read_analog_multichannel:
     This code contains the measurement class, which contains a set of methods such as filtering and data input and output. It also contains     the SPI communication between the RaspberryPi and the Analog-Digital-Converter.
+
+-GUI
+    >> pysta_v01.01.py: design of the GUI, dependencies and feedback of button press actions not implemented.
+    >> *.svg: accessories
