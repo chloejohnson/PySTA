@@ -18,3 +18,6 @@ CODES:
 - ANIMATION:
     Beam_ani.py: animates a 1D beam in its first mode shape from given voltage input of tip displacement
     test3.py: plots the real-time voltage input versus time of a sensor
+
+- read_analog_multichannel:
+    This code contains the measurement class, which contains a set of methods such as filtering and data input and output. It also contains     the SPI communication between the RaspberryPi and the Analog-Digital-Converter.
