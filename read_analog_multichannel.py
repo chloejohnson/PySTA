@@ -40,7 +40,7 @@ class Measurement():
 			
 		return ch0_data,ch1_data
 		
-	def filterData(self,filter_type)
+	def filterData(self,filter_type):#
 		
 		raise NotImplementedError
 
