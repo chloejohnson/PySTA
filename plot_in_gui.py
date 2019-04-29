@@ -19,9 +19,9 @@ from read_analog_multichannel import data_loop, Measurement
 class Window(QtWidgets.QDialog):
     ## Class to create animation object that plots real-time voltage vs time
 
-    def __init__(self):#channel)
+    def __init__(self, channel):
         super(Window, self).__init__()
-        #self.channel = channel
+        self.channel = channel
         
         ## Animation figure
         self.fig = Figure(figsize=(5,4),dpi=100)
@@ -42,28 +42,29 @@ class Window(QtWidgets.QDialog):
         self.ax = self.fig.add_subplot(111) 
         self.line, = self.ax.plot([], [], lw=1)
         self.ax.grid()
+        self.ax.set_ylim(-10,10)
+        self.ax.set_xlim(0,10)
+        self.ax.set_xlabel('Time [sec]')
+        self.ax.set_ylabel('Voltage Out [V]')
+        self.ax.set_title('Channel ' + str(self.channel))
         self.xdata, self.ydata = [], []
-        self.xlabel('Time [sec]')
-        self.ylabel('Output [V]')
         
         def data_gen(t=0):
             ## Generate real-time time and voltage for each frame
             run = Measurement(fs = 10, active_channels=[0,1]) ## Instance of measurement class
             while True:
                 data_loop(run) ## Adds point to end of vtime and data list
-                yield run.time[-1], run.data[-1][0]
+                yield run.time[-1], run.data[-1][self.channel]
         
         ## ~Run animation functioion~
-        self.anim = animation.FuncAnimation(self.fig, self.animate_loop, data_gen, blit=False, interval=.001,
-                              repeat=False)#, init_func=self.initial)
+        self.anim = animation.FuncAnimation(self.fig, self.animate_loop, data_gen, blit=True,
+                                            interval=.001, repeat=False, init_func=self.initial)
         ## Update figure in GUI
         self.canvas.update()
    
    
     def initial(self):
         ## Set initial values and plot limits
-        self.ax.set_ylim(-10,10)
-        self.ax.set_xlim(0,10)
         del self.xdata[:]
         del self.ydata[:]
         self.line.set_data(self.xdata,self.ydata)
