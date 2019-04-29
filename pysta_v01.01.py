@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+# -*- coding: utf-8 -*-
 
 #############################################################################
 ##
@@ -52,6 +52,7 @@ from PyQt5.QtGui import QGuiApplication, QPixmap, QIcon
 from PyQt5.QtQml import QQmlApplicationEngine
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
+from plot_in_gui import Window
 
 class MatplotlibWidget(QWidget):
     def __init__(self, parent=None):
@@ -90,6 +91,7 @@ class WidgetGallery(QDialog):
         shutButton = QPushButton('Shut Down!')
         shutButton.clicked.connect(lambda a:QCoreApplication.instance().quit())
         playButton = QPushButton()
+#        playButton.clicked.connect(self.played)
         playButton.setIcon(QIcon('play.svg'))
         pauseButton = QPushButton()
         pauseButton.setIcon(QIcon('pause.svg'))
@@ -158,7 +160,7 @@ class WidgetGallery(QDialog):
         
         tab3 = QWidget()
 
-        self.matplotlibWidget = MatplotlibWidget(self)
+        self.matplotlibWidget = Window()
 
         tab3hbox = QHBoxLayout()
         tab3hbox.setContentsMargins(5, 5, 5, 5)
