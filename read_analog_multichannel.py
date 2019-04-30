@@ -10,12 +10,12 @@ import Adafruit_MCP3008
 
 class Measurement():
 	'''
-		This is an abstract	class that contains all options for a specific measurement run. For each new run an object of this class is created 
+		This is an abstract class that contains all options for a specific measurement run. For each new run an object of this class is created 
 		and all data is saved as its attribute.
 	
 	'''
-	def __init__(self, fs = 100, active_channels = [0,1]):
-		
+	def __init__(self, fs = 100):
+		# The object is created with sampling frequency fs, and empty lists for time and data.
 		self.time = []
 		self.t_init = time.time()
 		self.data = []
@@ -23,13 +23,13 @@ class Measurement():
 		self.active_channels = active_channels
 		
 	def setData(self,values):
-	# This is done in a loop, where data is continuously written to a measurment object
+	# The values for all 8 channels are added to the 'data' attribute of the measurement object
 		for i in values:
 			self.data.append(values)
 		return 	
 		
 	def setTime(self,t0):
-	# This is done in a loop, where data is continuously written to a measurment object
+	# The values for the current time (relative to the start time 't_init' is added to the 'time' attribute of the measurement object
 		
 		self.time.append(t0-self.t_init)
 		return 	
@@ -48,7 +48,7 @@ class Measurement():
 		return ch0_data,ch1_data
 		
 	def filterData(self,filter_type):
-		
+	# Future work, possible implementation of FIR or IIR filters	
 		raise NotImplementedError
 
 ## Hardware configuration
@@ -84,32 +84,30 @@ def data_loop(run):
 
 
 
-    ## This loop gets activated whenever the play button is pressed
-    # Initiallize measurement
     
-    T  = 1/run.fs
     
-    #button_stream = True
-    values = [0]*8
+    
+    T  = 1/run.fs  # time-interval between measurements
+    values = [0]*8 # empty list for values
 
-    #while button_stream == True:
+    
     t0 = time.time()
-    for i in range(0,8):
+    for i in range(0,8): # loop over all channels
         values[i] = mcp.read_adc(i)*3.3/1024
     print('| {0:>4} | {1:>4} | {2:>4} | {3:>4} | {4:>4} | {5:>4} | {6:>4} | {7:>4} |'.format(*values))
-    run.setData(values)
-    run.setTime(t0)
-    print(run.time[-1])
-    time.sleep(T-time.time()+t0)
+    run.setData(values) # send data to measurment object 'run'
+    run.setTime(t0) # send time to measurment object 'run'
+     
+    time.sleep(T-time.time()+t0) # enforce the requested sampling frequency by sleeping for a certain time between each loop
     tf = time.time()
-    print('Elapsed time:', tf	- t0)
+    #print('Elapsed time:', tf	- t0) # this should be very close to the required interval time T=1/fs
 	
 	
 	
-    if T-(tf-t0) > 0.01: # check if the application can run in realtime
+    if T-(tf-t0) > 0.01: # check if the application can run in (almost) realtime
         print('----------------------------------------------------------------')
         print('Sampling frequency too large, application cannot run in realtime')
 	#	print('----------------------------------------------------------------')
-##        button_stream =False
+
 		
     return run
