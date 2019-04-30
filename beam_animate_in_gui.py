@@ -76,12 +76,13 @@ class AniWindow(QtWidgets.QDialog):
             while True:
                 ## Make beam points and mode shape
                 L = 15/100 
+                zero_displ_V = 1.9
                 x = np.arange(0.0,L+.01,0.01)
                 PHI = modeShapes(L)
                 
                 ## Get real-time tip displacement
                 data_loop(run)                                                  ## Adds point to end of vtime and data list
-                tip_displ = run.data[-1][1] / 1000                              ## CONVERSION: 1mm / V * 1m/1000mm 
+                tip_displ = (run.data[-1][1]-zero_displ_V) / 1000                              ## CONVERSION: 1mm / V * 1m/1000mm 
                 print(x)
                 print(PHI[0]*tip_displ*mag)
                 yield x, PHI[0]*tip_displ*mag
