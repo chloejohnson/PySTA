@@ -17,10 +17,11 @@ from read_analog_multichannel import data_loop, Measurement
 class Window(QtWidgets.QDialog):
     ## Class to create animation object that plots real-time voltage vs time
 
-    def __init__(self, channel,fs):
+    def __init__(self, channel,fs,N_samples):
         super(Window, self).__init__()
         self.channel = channel
         self.fs = fs
+        self.N_samples = N_samples
         
         ## Animation figure
         self.fig = Figure(figsize=(5,4),dpi=100)
@@ -51,7 +52,8 @@ class Window(QtWidgets.QDialog):
         def data_gen(t=0):
             ## Generate real-time time and voltage for each frame
             run = Measurement(fs = self.fs, active_channels=[0,1]) ## Instance of measurement class
-            while True:
+            cnt = 0
+            while cnt < self.N_samples:
                 data_loop(run) ## Adds point to end of vtime and data list
                 yield run.time[-1], run.data[-1][self.channel]
         
