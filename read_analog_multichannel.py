@@ -50,7 +50,17 @@ class Measurement():
 	def filterData(self,filter_type):
 	# Future work, possible implementation of FIR or IIR filters	
 		raise NotImplementedError
+    
+    def saveData(self,type='time',name='testfile'):
+        file = open(name,'w+')
 
+        file.write('| time | Chann0 | Chann1 | Chann2 | Chann3 | Chann4 | Chann5 | Chann6 | Chann7 |\n')
+        for i in range(0,len(time)):
+            file.write('| {8:.2f} | {0:.4f} | {1:.4f} | {2:.4f} | {3:.4f} | {4:.4f} | {5:.4f} | {6:.4f} | {7:.4f} |\n'.format(*self.data[i],self.time[i]))
+        file.close()
+        return
+        
+        
 ## Hardware configuration
 # This is the preferred method. Connect the D_OUT pin of the ADC 3008 to 
 # the SPI-designated port on the RaspberryPi 
