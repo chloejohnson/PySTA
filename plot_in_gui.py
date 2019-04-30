@@ -9,8 +9,6 @@ PLOT REAL-TIME VOLTAGES FROM SENSORS READ IN BY RASPERRY PI
 """
 from PyQt5 import QtGui, QtCore,QtWidgets
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
-import matplotlib.pyplot as plt
-from matplotlib.patches import Circle
 from matplotlib import animation
 from matplotlib.figure import Figure
 from read_analog_multichannel import data_loop, Measurement
@@ -42,7 +40,7 @@ class Window(QtWidgets.QDialog):
         self.ax = self.fig.add_subplot(111) 
         self.line, = self.ax.plot([], [], lw=1)
         self.ax.grid()
-        self.ax.set_ylim(-10,10)
+        self.ax.set_ylim(-5,5)
         self.ax.set_xlim(0,10)
         self.ax.set_xlabel('Time [sec]')
         self.ax.set_ylabel('Voltage Out [V]')
@@ -64,10 +62,8 @@ class Window(QtWidgets.QDialog):
    
    
     def initial(self):
-        ## Set initial values and plot limits
-        del self.xdata[:]
-        del self.ydata[:]
-        self.line.set_data(self.xdata,self.ydata)
+        ## Clear data
+        self.line.set_data([],[])
         
         return self.line,
        
