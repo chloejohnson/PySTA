@@ -19,8 +19,9 @@ from numpy import sin, cos, cosh, sinh
 class AniWindow(QtWidgets.QDialog):
     ## Class to create animation object that plots real-time voltage vs time
 
-    def __init__(self):
+    def __init__(self,fs):
         super(AniWindow, self).__init__()
+        self.fs = fs
         
         ## Animation figure
         self.fig = Figure(figsize=(5,4),dpi=100)
@@ -70,7 +71,7 @@ class AniWindow(QtWidgets.QDialog):
         
         def data_gen(t=0):
             ## Generate real-time tip displacement
-            run = Measurement(fs = 10, active_channels=[0,1])                   ## Instance of measurement class
+            run = Measurement(fs = self.fs, active_channels=[0,1])                   ## Instance of measurement class
 
             while True:
                 ## Make beam points and mode shape
