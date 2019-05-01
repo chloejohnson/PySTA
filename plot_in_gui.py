@@ -54,6 +54,7 @@ class Window(QtWidgets.QDialog):
             run = Measurement(fs = self.fs, active_channels=[0,1]) ## Instance of measurement class
             cnt = 0
             while cnt < self.N_samples:
+                cnt = cnt+1
                 data_loop(run) ## Adds point to end of vtime and data list
                 yield run.time[-1], run.data[-1][self.channel]
         
