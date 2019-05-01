@@ -34,5 +34,5 @@ CODES:
      
 
 - GUI
-    > pysta_v01.01.py: design of the GUI, dependencies and feedback of button press actions not implemented.
+    > pysta_v04.py: design of the GUI, dependencies and feedback of button press actions not implemented.
     > *.svg: accessories (images for GUI buttons, ect.)
