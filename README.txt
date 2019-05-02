@@ -22,10 +22,10 @@ displacement of the beam.
 CODES:
 
 
-
 - ANIMATION:
     > plot_in_gui.py: Plots the real-time voltage input versus time of a sensor. Creates a class, Window(channel = #, fs = #, N_samples = #), which is a function of the channel voltage to be plotted, the sampling frequency, and the number of samples to be read.
     > beam_animate_in_gui.py: Animates a 1D beam in its first mode shape from given voltage input of tip displacement. Creates a class, AniWindow(fs = #, N_samples = #), which is a function of the sampling frequency and the number of               samples to be read.).
+
 
 - RASPBERRY PI INTERFACE:
     > The analog data is read by the RaspberryPi through an Analog-Digital-Converter (ADC) of type MCP3008, which allows 8 channels to be read with a 10bit resolution. In its current configuration, the measurement range of the analog input is [0-3.3V DC].
@@ -36,3 +36,5 @@ CODES:
     > pysta.py: This file encompasses the design of the GUI. Layout, tabs, widgets and options for user inputs are handled here. Dependencies and feedback of reset and shut buttons are also implemented. Matplotlib widgets returned by plot_in_gui and beam_animate_in_gui are added to the respective tabs. 
     > *.svg: accessories (images for GUI buttons, etc.)
     
+
+- txt files are sample outputs of measured data
