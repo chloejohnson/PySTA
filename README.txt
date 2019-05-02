@@ -34,5 +34,6 @@ CODES:
      
 
 - GUI
-    > pysta_v04.py: design of the GUI, dependencies and feedback of button press actions not implemented.
-    > *.svg: accessories (images for GUI buttons, ect.)
+    > pysta.py: This file encompasses the design of the GUI. Layout, tabs, widgets and options for user inputs are handled here. Dependencies and feedback of reset and shut buttons are also implemented. Matplotlib widgets returned by plot_in_gui and beam_animate_in_gui are added to the respective tabs. 
+    > *.svg: accessories (images for GUI buttons, etc.)
+    > 
