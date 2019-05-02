@@ -1,13 +1,5 @@
 Created 04/26/2019
 Group Members: Marc Eitner, Palash Jain, Chloe Johnson
-  Full Name: Marc Eitner
-  EID: mae2888
-
-  Full Name: Palash Jain
-  EID: pj5453
-
-  Full Name: Chloe Johnson
-  EID: cmj2855
 
 The objective of this project is to replicate an instrument interface such as 
 LabView using Python and a Raspberry Pi, making data collection for small 
